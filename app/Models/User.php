@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image',
     ];
 
     /**
@@ -48,6 +49,8 @@ class User extends Authenticatable
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_users');
+        return $this->belongsToMany(Product::class, 'product_users')
+            ->withPivot('accepted')
+            ->withTimestamps();
     }
 }
